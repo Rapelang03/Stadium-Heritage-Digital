@@ -26,32 +26,27 @@ import Gallery from "@/pages/Gallery";
 import Contacts from "@/pages/Contacts";
 import Faq from "@/pages/Faq";
 import Sources from "@/pages/Sources";
+import MapPage from "@/pages/Map";
+import Sefika from "@/pages/Sefika";
+import ThamaeChurch from "@/pages/ThamaeChurch";
+import Library from "@/pages/Library";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
 
-// Floating Back to Top Button
 function BackToTop() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.scrollY > 300) {
-        setVisible(true);
-      } else {
-        setVisible(false);
-      }
+      setVisible(window.scrollY > 300);
     };
-
     window.addEventListener("scroll", toggleVisibility);
     return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -67,6 +62,7 @@ function BackToTop() {
             size="icon"
             className="h-12 w-12 rounded-full shadow-xl hover:shadow-2xl transition-all"
             onClick={scrollToTop}
+            data-testid="button-back-to-top"
           >
             <ArrowUp className="h-6 w-6" />
           </Button>
@@ -81,7 +77,6 @@ function Router() {
     <main className="flex-1 flex flex-col">
       <Switch>
         <Route path="/" component={Home} />
-        
         <Route path="/about" component={About} />
         <Route path="/history" component={History} />
         <Route path="/villages" component={Villages} />
@@ -95,7 +90,10 @@ function Router() {
         <Route path="/contacts" component={Contacts} />
         <Route path="/faq" component={Faq} />
         <Route path="/sources" component={Sources} />
-        
+        <Route path="/map" component={MapPage} />
+        <Route path="/sefika" component={Sefika} />
+        <Route path="/thamae-church" component={ThamaeChurch} />
+        <Route path="/library" component={Library} />
         <Route component={NotFound} />
       </Switch>
     </main>

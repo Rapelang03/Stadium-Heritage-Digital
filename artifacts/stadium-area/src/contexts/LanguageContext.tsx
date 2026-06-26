@@ -24,6 +24,10 @@ const translations: Translations = {
   contacts: { EN: 'Contact', ST: 'Ikopanya' },
   faq: { EN: 'FAQ', ST: 'Lipotso' },
   sources: { EN: 'Sources', ST: 'Metheo le Mehloli' },
+  map: { EN: 'Interactive Map', ST: 'Mmapa oa Poraena' },
+  sefika: { EN: 'Sefika Campus', ST: 'Kepe ea Sefika' },
+  thamaeChurch: { EN: 'Thamae Church', ST: 'Kereke ea Thamae' },
+  library: { EN: 'Spiritual Hub', ST: 'Setsi sa Moya' },
   welcome: { EN: 'Welcome to Stadium Area', ST: 'Rea u amohela Sebakeng sa Setadieme' },
   learnMore: { EN: 'Learn More', ST: 'Ithuta Hape' },
   explore: { EN: 'Explore', ST: 'Hlahloba' },
@@ -31,7 +35,8 @@ const translations: Translations = {
   community: { EN: 'Community', ST: 'Sechaba' },
   institutions: { EN: 'Institutions', ST: 'Mekhatlo' },
   civic: { EN: 'Civic', ST: 'Setjhaba' },
-  info: { EN: 'Info', ST: 'Lintlha' }
+  info: { EN: 'Info', ST: 'Lintlha' },
+  campus: { EN: 'Campus & Faith', ST: 'Kepe le Tumelo' },
 };
 
 interface LanguageContextType {

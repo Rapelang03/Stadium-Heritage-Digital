@@ -1,0 +1,119 @@
+## Full Prompt for Rebuilding the Website from Scratch
+
+Create a complete Stadium Area website from scratch using plain HTML and Tailwind CSS. Build a premium, fully responsive mobile-first page with a sticky top navigation bar and anchored sections.
+
+The site should begin as a Stadium Area hub and then expand into the LECSA/Sefika campus story.
+
+### Exact local asset paths
+
+Use only these exact files in the project:
+
+- sefika-church-logo.png
+- sefika-school-logo.png
+- thamae-church-logo.png
+- thamae-school-logo.png
+- bible-cover.jpg
+- hymn-cover.jpg
+- gallery-1.jpg
+- sports.mp4
+- church.mp4
+- bochaba.mp4
+- lifela-tsa-sione.pdf
+- bibele-e-halalelang.pdf
+
+### Page structure
+
+1. **Stadium Area Hub**
+   - Build the site around a Stadium Area theme first.
+   - Create a rich hero landing section that introduces the Stadium Area community and its identity.
+   - Show stadium imagery, local community pride, and the stadium area as a central public space.
+   - Include:
+     - Stadium overview copy
+     - local attractions / tourism highlights
+     - visitor info and marketplace teaser
+     - a prominent callout for “Stadium Area Community Hub”
+
+2. **Stadium Area Experience**
+   - Add deeper Stadium Area detail than the LECSA section:
+     - local stadium features
+     - stadium event listings
+     - visitor arrival info
+     - community marketplace and partner businesses
+     - tourism and attractive places around the stadium area
+   - Use premium cards and large visual sections.
+   - Add a tourism attractions section with attractive destination cards, historic sites, markets, cultural walk routes, and nearby visitor highlights.
+
+3. **Sefika Campus and LECSA**
+   - After the Stadium Area hub, add SEFIKA and LECSA campus content.
+   - Add a premium “Sefika Campus Hub” section linked from the nav.
+   - Add “Upper Thamae / LECSA Church Portal” content.
+
+4. **Sefika High School Portal**
+   - Display sefika-school-logo.png
+   - Add mock LGCSE Academic Results panel
+   - Add Form 1 Admissions info panel
+   - Add School Store section with uniform bundles and textbook packages
+   - Add a video showcase using two responsive HTML5 players:
+     - sports.mp4 labeled “Inter-High Sports & Athletics”
+     - bochaba.mp4 labeled “Bochaba Traditional Day Celebrations”
+
+5. **Upper Thamae Church Portal**
+   - Display thamae-church-logo.png
+   - Show service times and Thapelo ea Sontaha
+   - Include Holy Communion notice
+   - Include info blocks for:
+     - Mokhatlo oa Basali
+     - Banna
+     - Bacha
+   - Add Worship Media with:
+     - church.mp4
+   - Add a Parish Marketplace catalog:
+     - uniform fabric bundles
+     - badges
+     - choir concert tickets
+
+6. **Digital Spiritual Hub & Library**
+   - Create two premium download cards:
+     - Bible download with bibele-e-halalelang.pdf and bible-cover.jpg
+     - Hymn book download with lifela-tsa-sione.pdf and hymn-cover.jpg
+   - Build an interactive hymn explorer:
+     - client-side search/filter field
+     - support hymn numbers and titles
+     - preloaded hymns:
+       - Sefela 1: “Pele lentsoe la na la re...”
+       - Sefela 10: “Oho, nkutlwele bohloko”
+       - Sefela 145: “Ke bone, ke bone tsela”
+     - clicking a hymn reveals lyric verses in an expandable panel or modal
+   - Add a Daily Scripture Motivation card:
+     - show a verse in Sesotho and English
+     - include a “Next Verse” button cycling through 5–10 prewritten scriptures
+
+7. **Tourism / Attractions**
+   - Add a stadium-area tourism section.
+   - Highlight local attractions and visitor experiences near Stadium Area.
+   - Use styled cards with short descriptions and visual appeal.
+
+### Design and style
+
+- Use Tailwind CSS utilities only
+- Premium palette: deep maroon, rich navy/slate blue, white spacing
+- Rounded cards, soft shadow frames, and smooth hover transitions
+- Use dark frames and rounded corners around videos
+- Fully responsive, mobile-first layout
+- Sticky navigation bar linking each major section
+
+### Nav links
+
+Include a sticky nav that links to:
+
+- `Landing`
+- `Stadium Area`
+- `Sefika Campus`
+- `Thamae Church`
+- `Media`
+- `Library`
+- `Attractions`
+
+### Summary
+
+This prompt should produce a Stadium Area website that starts with a strong stadium-area hub, then expands into the LECSA/Sefika campus sections. The Stadium Area part must be deeper and richer than the Sefika section, while still including the new LECSA additions.
