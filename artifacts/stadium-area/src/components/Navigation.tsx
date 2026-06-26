@@ -32,7 +32,7 @@ export function Navigation() {
 
   const navGroups: NavGroup[] = [
     {
-      title: "Discover",
+      title: t("discover") || "Discover",
       items: [
         { href: "/", label: t("home") || "Home" },
         { href: "/about", label: t("about") || "About" },
@@ -41,37 +41,37 @@ export function Navigation() {
       ],
     },
     {
-      title: "Heritage",
+      title: t("heritage") || "Heritage",
       items: [
         { href: "/villages", label: t("villages") || "Villages" },
         { href: "/culture", label: t("culture") || "Culture" },
         { href: "/places", label: t("places") || "Sacred Places" },
         { href: "/gallery", label: t("gallery") || "Gallery" },
-        { href: "/sources", label: "Sources" },
+        { href: "/sources", label: t("sources") || "Sources" },
       ],
     },
     {
-      title: "Institutions",
+      title: t("institutions") || "Institutions",
       items: [
         { href: "/education", label: t("education") || "Education" },
         { href: "/sports", label: t("sports") || "Sports" },
-        { href: "/sefika", label: "Sefika Campus" },
-        { href: "/thamae-church", label: "LECSA Church" },
-        { href: "/library", label: "Digital Library" },
+        { href: "/sefika", label: t("sefika") || "Sefika Campus" },
+        { href: "/thamae-church", label: t("thamaeChurch") || "LECSA Church" },
+        { href: "/library", label: t("digitalLibrary") || "Digital Library" },
       ],
     },
     {
-      title: "Community",
+      title: t("community") || "Community",
       items: [
-        { href: "/marketplace", label: "Marketplace", icon: ShoppingBag },
-        { href: "/events", label: "Events", icon: Calendar },
-        { href: "/mokhosi", label: "Mokhosi Alerts", icon: Bell },
-        { href: "/businesses", label: "Business Directory", icon: Building2 },
-        { href: "/tourism", label: "Tourism", icon: Map },
+        { href: "/marketplace", label: t("marketplace") || "Marketplace", icon: ShoppingBag },
+        { href: "/events", label: t("events") || "Events", icon: Calendar },
+        { href: "/mokhosi", label: t("mokhosiAlerts") || "Mokhosi Alerts", icon: Bell },
+        { href: "/businesses", label: t("businessDirectory") || "Business Directory", icon: Building2 },
+        { href: "/tourism", label: t("tourism") || "Tourism", icon: Map },
         { href: "/developments", label: t("developments") || "Developments" },
         { href: "/news", label: t("news") || "News" },
         { href: "/contacts", label: t("contacts") || "Contacts" },
-        { href: "/faq", label: "FAQ" },
+        { href: "/faq", label: t("faq") || "FAQ" },
       ],
     },
   ];
@@ -179,13 +179,13 @@ export function Navigation() {
                       </div>
                       <Link href="/dashboard">
                         <div className="flex items-center gap-2.5 px-4 py-2.5 text-sm font-display cursor-pointer hover:bg-muted transition-colors">
-                          <User className="h-4 w-4 text-muted-foreground" />My Dashboard
+                          <User className="h-4 w-4 text-muted-foreground" />{t("myDashboard")}
                         </div>
                       </Link>
                       {user.role === "admin" && (
                         <Link href="/admin">
                           <div className="flex items-center gap-2.5 px-4 py-2.5 text-sm font-display cursor-pointer hover:bg-muted transition-colors">
-                            <Shield className="h-4 w-4 text-muted-foreground" />Admin Panel
+                            <Shield className="h-4 w-4 text-muted-foreground" />{t("adminPanel")}
                           </div>
                         </Link>
                       )}
@@ -193,7 +193,7 @@ export function Navigation() {
                         onClick={async () => { await logout(); }}
                         className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm font-display cursor-pointer hover:bg-muted transition-colors text-destructive"
                       >
-                        <LogOut className="h-4 w-4" />Sign Out
+                        <LogOut className="h-4 w-4" />{t("signOut")}
                       </button>
                     </motion.div>
                   )}
@@ -202,10 +202,10 @@ export function Navigation() {
             ) : (
               <div className="hidden sm:flex items-center gap-2">
                 <Link href="/login">
-                  <button className="px-3 py-1.5 text-sm font-semibold font-display hover:bg-muted rounded-lg transition-all">Sign In</button>
+                  <button className="px-3 py-1.5 text-sm font-semibold font-display hover:bg-muted rounded-lg transition-all">{t("signIn")}</button>
                 </Link>
                 <Link href="/register">
-                  <button className="btn-gold py-1.5 px-4 text-sm">Join</button>
+                  <button className="btn-gold py-1.5 px-4 text-sm">{t("join")}</button>
                 </Link>
               </div>
             )}

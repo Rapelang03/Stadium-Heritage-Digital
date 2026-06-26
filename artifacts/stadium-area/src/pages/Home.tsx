@@ -13,7 +13,7 @@ export default function Home() {
       <section className="relative h-[85vh] w-full flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
-            src="/images/stadium.png" 
+            src="/images/stadium.jpg" 
             alt="Setsoto Stadium" 
             className="w-full h-full object-cover object-center"
           />
@@ -165,7 +165,7 @@ export default function Home() {
                 className="bg-card rounded-xl overflow-hidden shadow-sm border border-border group hover:shadow-md transition-all"
               >
                 <div className="h-48 bg-muted overflow-hidden">
-                  <img src={`/images/${i === 1 ? 'stadium' : i === 2 ? 'village' : 'education'}.png`} alt="News" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <img src={`/images/${i === 1 ? 'stadium' : i === 2 ? 'maseru' : 'education'}.png`} alt="News" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <div className="p-6">
                   <div className="text-sm text-primary font-semibold mb-2">Community</div>

@@ -1,12 +1,27 @@
+import { type ReactNode } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, Building, ShieldAlert, GraduationCap } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
+type Contact = {
+  name: string;
+  phone: string;
+  details?: string;
+  email?: string;
+  address?: string;
+};
+
+type DirectorySection = {
+  category: string;
+  icon: ReactNode;
+  contacts: Contact[];
+};
+
 export default function Contacts() {
   const { language } = useLanguage();
 
-  const directories = [
+  const directories: DirectorySection[] = [
     {
       category: "Constituency Office",
       icon: <Building className="h-6 w-6" />,

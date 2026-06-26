@@ -1,25 +1,25 @@
-import { useState } from "react";
+import { useState, type MouseEvent } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const images = [
-  { src: "/images/landscape.png", alt: "Lesotho mountain landscapes", category: "Nature" },
-  { src: "/images/maseru-city.png", alt: "Maseru cityscape", category: "City" },
-  { src: "/images/stadium.png", alt: "Stadium atmosphere", category: "Sports" },
+  { src: "/images/stadium.jpg", alt: "Setsoto Stadium, Maseru", category: "Sports" },
+  { src: "/images/maseru.jpg", alt: "Maseru cityscape", category: "City" },
+  { src: "/images/uptown.jpg", alt: "Uptown Maseru skyline", category: "Culture" },
+  { src: "/images/south.jpg", alt: "Southern Maseru landscapes", category: "Nature" },
   { src: "/images/education.png", alt: "Lesotho school students", category: "Education" },
   { src: "/images/culture.png", alt: "Basotho tradition", category: "Culture" },
   { src: "/images/village.png", alt: "Village community scene", category: "Community" },
-  { src: "/images/mokorotlo.png", alt: "Basotho hat craft", category: "Heritage" },
+  { src: "/images/mokorotlo.png", alt: "Mokorotlo Hat craft", category: "Heritage" },
   { src: "/images/blanket.png", alt: "Lesotho traditional blanket", category: "Heritage" },
   { src: "/images/cathedral.png", alt: "Cathedral Maseru", category: "Landmark" },
-  { src: "/images/nature.png", alt: "Maseru district nature", category: "Nature" },
   { src: "/images/football.png", alt: "Football match action", category: "Sports" }
 ];
 
 export default function Gallery() {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -34,12 +34,12 @@ export default function Gallery() {
     document.body.style.overflow = "auto";
   };
 
-  const nextImage = (e: React.MouseEvent) => {
+  const nextImage = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     setCurrentIndex((prev) => (prev + 1) % images.length);
   };
 
-  const prevImage = (e: React.MouseEvent) => {
+  const prevImage = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
   };
@@ -56,7 +56,7 @@ export default function Gallery() {
             {language === 'EN' ? "Gallery" : "Difoto"}
           </h1>
           <p className="text-xl text-muted-foreground">
-            A visual archive of our vibrant community, landscapes, and heritage.
+            {t("galleryDescription")}
           </p>
         </motion.div>
 

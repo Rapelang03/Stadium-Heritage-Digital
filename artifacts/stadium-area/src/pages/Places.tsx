@@ -3,13 +3,13 @@ import { motion } from "framer-motion";
 import { MapPin } from "lucide-react";
 
 export default function Places() {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
 
   const places = [
     {
       name: "Setsoto Stadium",
       desc: "The national stadium and beating heart of the constituency. A monumental structure hosting national football matches and historic ceremonies.",
-      image: "/images/stadium.png"
+      image: "/images/stadium.jpg"
     },
     {
       name: "Our Lady of Victories Cathedral",
@@ -19,12 +19,12 @@ export default function Places() {
     {
       name: "Maseru City Centre",
       desc: "The bustling heart of Lesotho's capital, featuring traditional markets, modern shopping, and the beautiful red sandstone architecture the city is named for.",
-      image: "/images/maseru-city.png"
+      image: "/images/maseru.jpg"
     },
     {
       name: "Surrounding Landscapes",
       desc: "Just outside the urban center lie the majestic rolling hills and mountains that define Lesotho's geography, perfect for hiking and photography.",
-      image: "/images/nature.png"
+      image: "/images/south.jpg"
     }
   ];
 
@@ -40,7 +40,7 @@ export default function Places() {
             {language === 'EN' ? "Places to Visit" : "Libaka tse Battsoang"}
           </h1>
           <p className="text-xl text-muted-foreground">
-            Explore the landmarks and scenic areas that make Constituency No. 32 a unique destination in Lesotho.
+            {t("placesDescription")}
           </p>
         </motion.div>
 
@@ -62,7 +62,7 @@ export default function Places() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-8">
                 <div className="flex items-center space-x-2 text-white/80 mb-2">
                   <MapPin className="h-5 w-5" />
-                  <span className="text-sm font-medium uppercase tracking-wider">Landmark</span>
+                    <span className="text-sm font-medium uppercase tracking-wider">{t("landmark")}</span>
                 </div>
                 <h3 className="text-3xl font-serif font-bold text-white mb-3">{place.name}</h3>
                 <p className="text-white/80 text-lg leading-relaxed">{place.desc}</p>

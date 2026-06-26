@@ -10,7 +10,7 @@ export default function About() {
     <div className="min-h-screen bg-background pb-24">
       <div className="h-[40vh] w-full relative overflow-hidden bg-muted">
         <img 
-          src="/images/maseru-city.png" 
+          src="/images/maseru.jpg" 
           alt="Maseru City" 
           className="w-full h-full object-cover"
         />

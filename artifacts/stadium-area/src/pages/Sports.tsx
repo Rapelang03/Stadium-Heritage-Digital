@@ -19,7 +19,7 @@ export default function Sports() {
       {/* Hero Section */}
       <section className="relative h-[60vh] flex items-center">
         <div className="absolute inset-0">
-          <img src="/images/stadium.png" alt="Setsoto Stadium" className="w-full h-full object-cover" />
+          <img src="/images/stadium.jpg" alt="Setsoto Stadium" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/40" />
         </div>
         <div className="container mx-auto px-4 relative z-10">
