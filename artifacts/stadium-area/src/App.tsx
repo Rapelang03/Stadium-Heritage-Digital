@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { AuthProvider } from "@/contexts/AuthContext";
 import { useEffect, useState } from "react";
 import { ArrowUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -30,25 +31,26 @@ import MapPage from "@/pages/Map";
 import Sefika from "@/pages/Sefika";
 import ThamaeChurch from "@/pages/ThamaeChurch";
 import Library from "@/pages/Library";
+import LoginPage from "@/pages/Login";
+import RegisterPage from "@/pages/Register";
+import DashboardPage from "@/pages/Dashboard";
+import MarketplacePage from "@/pages/Marketplace";
+import EventsPage from "@/pages/Events";
+import MokhosiPage from "@/pages/Mokhosi";
+import BusinessesPage from "@/pages/Businesses";
+import TourismPage from "@/pages/Tourism";
+import AdminPage from "@/pages/Admin";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
 
 function BackToTop() {
   const [visible, setVisible] = useState(false);
-
   useEffect(() => {
-    const toggleVisibility = () => {
-      setVisible(window.scrollY > 300);
-    };
-    window.addEventListener("scroll", toggleVisibility);
-    return () => window.removeEventListener("scroll", toggleVisibility);
+    const toggle = () => setVisible(window.scrollY > 300);
+    window.addEventListener("scroll", toggle);
+    return () => window.removeEventListener("scroll", toggle);
   }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   return (
     <AnimatePresence>
       {visible && (
@@ -60,11 +62,10 @@ function BackToTop() {
         >
           <Button
             size="icon"
-            className="h-12 w-12 rounded-full shadow-xl hover:shadow-2xl transition-all"
-            onClick={scrollToTop}
-            data-testid="button-back-to-top"
+            className="h-12 w-12 rounded-full shadow-xl hover:shadow-2xl bg-primary text-primary-foreground transition-all"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
-            <ArrowUp className="h-6 w-6" />
+            <ArrowUp className="h-5 w-5" />
           </Button>
         </motion.div>
       )}
@@ -94,6 +95,15 @@ function Router() {
         <Route path="/sefika" component={Sefika} />
         <Route path="/thamae-church" component={ThamaeChurch} />
         <Route path="/library" component={Library} />
+        <Route path="/login" component={LoginPage} />
+        <Route path="/register" component={RegisterPage} />
+        <Route path="/dashboard" component={DashboardPage} />
+        <Route path="/marketplace" component={MarketplacePage} />
+        <Route path="/events" component={EventsPage} />
+        <Route path="/mokhosi" component={MokhosiPage} />
+        <Route path="/businesses" component={BusinessesPage} />
+        <Route path="/tourism" component={TourismPage} />
+        <Route path="/admin" component={AdminPage} />
         <Route component={NotFound} />
       </Switch>
     </main>
@@ -103,19 +113,21 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider defaultTheme="light" storageKey="stadium-area-theme">
+      <ThemeProvider defaultTheme="dark" storageKey="stadium-area-theme">
         <LanguageProvider>
-          <TooltipProvider>
-            <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-              <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300">
-                <Navigation />
-                <Router />
-                <Footer />
-                <BackToTop />
-              </div>
-            </WouterRouter>
-            <Toaster />
-          </TooltipProvider>
+          <AuthProvider>
+            <TooltipProvider>
+              <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+                <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300">
+                  <Navigation />
+                  <Router />
+                  <Footer />
+                  <BackToTop />
+                </div>
+              </WouterRouter>
+              <Toaster />
+            </TooltipProvider>
+          </AuthProvider>
         </LanguageProvider>
       </ThemeProvider>
     </QueryClientProvider>

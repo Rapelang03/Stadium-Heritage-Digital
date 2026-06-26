@@ -1,274 +1,267 @@
 import { Link, useLocation } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "@/contexts/ThemeContext";
-import { Button } from "@/components/ui/button";
-import { Menu, X, Moon, Sun, Globe } from "lucide-react";
-import { useState } from "react";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
+import { useAuth } from "@/contexts/AuthContext";
+import { Menu, X, Moon, Sun, Globe, User, Shield, LogOut, ChevronDown, Bell, ShoppingBag, Building2, Calendar, Map } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+
+interface NavItem { href: string; label: string; icon?: any; }
+interface NavGroup { title: string; items: NavItem[]; }
 
 export function Navigation() {
   const { language, setLanguage, t } = useLanguage();
   const { theme, setTheme } = useTheme();
+  const { user, logout } = useAuth();
   const [location] = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [openGroup, setOpenGroup] = useState<string | null>(null);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const navRef = useRef<HTMLDivElement>(null);
 
-  const toggleLanguage = () => {
-    setLanguage(language === "EN" ? "ST" : "EN");
-  };
+  useEffect(() => { setMobileOpen(false); setOpenGroup(null); setUserMenuOpen(false); }, [location]);
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setOpenGroup(null); setUserMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
 
-  const navGroups = [
+  const navGroups: NavGroup[] = [
     {
-      title: t("discover"),
+      title: "Discover",
       items: [
-        { href: "/", label: t("home") },
-        { href: "/about", label: t("about") },
-        { href: "/history", label: t("history") },
-        { href: "/map", label: t("map") },
+        { href: "/", label: t("home") || "Home" },
+        { href: "/about", label: t("about") || "About" },
+        { href: "/history", label: t("history") || "History" },
+        { href: "/map", label: t("map") || "Interactive Map", icon: Map },
       ],
     },
     {
-      title: t("community"),
+      title: "Heritage",
       items: [
-        { href: "/villages", label: t("villages") },
-        { href: "/culture", label: t("culture") },
-        { href: "/places", label: t("places") },
+        { href: "/villages", label: t("villages") || "Villages" },
+        { href: "/culture", label: t("culture") || "Culture" },
+        { href: "/places", label: t("places") || "Sacred Places" },
+        { href: "/gallery", label: t("gallery") || "Gallery" },
+        { href: "/sources", label: "Sources" },
       ],
     },
     {
-      title: t("institutions"),
+      title: "Institutions",
       items: [
-        { href: "/education", label: t("education") },
-        { href: "/sports", label: t("sports") },
-        { href: "/sefika", label: t("sefika") },
+        { href: "/education", label: t("education") || "Education" },
+        { href: "/sports", label: t("sports") || "Sports" },
+        { href: "/sefika", label: "Sefika Campus" },
+        { href: "/thamae-church", label: "LECSA Church" },
+        { href: "/library", label: "Digital Library" },
       ],
     },
     {
-      title: t("campus"),
+      title: "Community",
       items: [
-        { href: "/thamae-church", label: t("thamaeChurch") },
-        { href: "/library", label: t("library") },
-        { href: "/developments", label: t("developments") },
-        { href: "/news", label: t("news") },
-      ],
-    },
-    {
-      title: t("info"),
-      items: [
-        { href: "/gallery", label: t("gallery") },
-        { href: "/contacts", label: t("contacts") },
-        { href: "/faq", label: t("faq") },
-        { href: "/sources", label: t("sources") },
+        { href: "/marketplace", label: "Marketplace", icon: ShoppingBag },
+        { href: "/events", label: "Events", icon: Calendar },
+        { href: "/mokhosi", label: "Mokhosi Alerts", icon: Bell },
+        { href: "/businesses", label: "Business Directory", icon: Building2 },
+        { href: "/tourism", label: "Tourism", icon: Map },
+        { href: "/developments", label: t("developments") || "Developments" },
+        { href: "/news", label: t("news") || "News" },
+        { href: "/contacts", label: t("contacts") || "Contacts" },
+        { href: "/faq", label: "FAQ" },
       ],
     },
   ];
 
+  const isActive = (href: string) => href === "/" ? location === "/" : location.startsWith(href);
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center space-x-2">
-          <span className="font-serif font-bold text-xl tracking-tight text-primary">
-            Stadium Area
-          </span>
-          <span className="hidden sm:inline-block text-sm text-muted-foreground border-l pl-2 border-border/50">
-            Constituency No. 32
-          </span>
-        </Link>
+    <nav ref={navRef} className="sticky top-0 z-50 border-b border-border bg-card/80 backdrop-blur-md shadow-sm">
+      {/* Gold top stripe */}
+      <div className="h-0.5 gold-gradient" />
 
-        {/* Desktop Nav */}
-        <div className="hidden lg:flex items-center space-x-4">
-          <NavigationMenu>
-            <NavigationMenuList>
-              {navGroups.map((group) => (
-                <NavigationMenuItem key={group.title}>
-                  <NavigationMenuTrigger className="bg-transparent text-sm">
-                    {group.title}
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid w-[320px] gap-2 p-4 md:w-[400px] md:grid-cols-2">
-                      {group.items.map((item) => (
-                        <li key={item.href}>
-                          <NavigationMenuLink asChild>
-                            <Link
-                              href={item.href}
-                              className={`block select-none rounded-md px-3 py-2 text-sm leading-none no-underline outline-none transition-colors hover:bg-accent/10 hover:text-accent-foreground focus:bg-accent/10 ${
-                                location === item.href
-                                  ? "bg-primary/10 text-primary font-semibold"
-                                  : "text-foreground"
-                              }`}
-                            >
-                              {item.label}
-                            </Link>
-                          </NavigationMenuLink>
-                        </li>
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex items-center h-16 gap-4">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2.5 flex-shrink-0 mr-4 group">
+            <div className="h-9 w-9 rounded-lg gold-gradient flex items-center justify-center text-lg font-bold shadow-sm group-hover:shadow-md transition-shadow">
+              🦁
+            </div>
+            <div className="hidden sm:block leading-tight">
+              <p className="text-sm font-bold font-display tracking-tight">Stadium Area</p>
+              <p className="text-[10px] text-muted-foreground font-display tracking-wider uppercase">Constituency No. 32</p>
+            </div>
+          </Link>
+
+          {/* Desktop Nav Groups */}
+          <div className="hidden lg:flex items-center gap-1 flex-1">
+            {navGroups.map(group => (
+              <div key={group.title} className="relative">
+                <button
+                  onClick={() => setOpenGroup(openGroup === group.title ? null : group.title)}
+                  className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-semibold font-display transition-all ${openGroup === group.title ? "bg-primary/10 text-primary" : "hover:bg-muted text-foreground/80 hover:text-foreground"}`}
+                >
+                  {group.title}
+                  <ChevronDown className={`h-3.5 w-3.5 transition-transform ${openGroup === group.title ? "rotate-180" : ""}`} />
+                </button>
+                <AnimatePresence>
+                  {openGroup === group.title && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8, scale: 0.97 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 8, scale: 0.97 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute top-full left-0 mt-2 w-56 heritage-card shadow-xl py-1.5 z-50"
+                    >
+                      {group.items.map(item => (
+                        <Link key={item.href} href={item.href}>
+                          <div className={`flex items-center gap-2 px-4 py-2.5 text-sm font-display cursor-pointer transition-all ${isActive(item.href) ? "text-primary bg-primary/8 font-semibold" : "text-foreground/80 hover:text-foreground hover:bg-muted"}`}>
+                            {item.icon && <item.icon className="h-3.5 w-3.5 text-muted-foreground" />}
+                            {item.label}
+                          </div>
+                        </Link>
                       ))}
-                    </ul>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-              ))}
-            </NavigationMenuList>
-          </NavigationMenu>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
+          </div>
 
-          <div className="flex items-center space-x-1 border-l pl-3 border-border/50">
+          {/* Right Controls */}
+          <div className="flex items-center gap-2 ml-auto">
             {/* Language Toggle */}
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={toggleLanguage}
-              className="relative gap-1.5 font-semibold text-xs px-3"
-              title={`Switch to ${language === "EN" ? "Sesotho" : "English"}`}
-              data-testid="button-language-toggle"
+            <button
+              onClick={() => setLanguage(language === "EN" ? "ST" : "EN")}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold font-display border border-border hover:border-primary/40 hover:bg-muted transition-all"
             >
-              <Globe className="h-4 w-4" />
-              <span
-                className={`px-1.5 py-0.5 rounded text-[11px] font-bold transition-all ${
-                  language === "EN"
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-green-600 text-white"
-                }`}
-              >
-                {language === "EN" ? "EN" : "ST"}
-              </span>
-            </Button>
+              <Globe className="h-3.5 w-3.5" />
+              {language === "EN" ? "ST" : "EN"}
+            </button>
 
             {/* Theme Toggle */}
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-              data-testid="button-theme-toggle"
-              title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="h-8 w-8 flex items-center justify-center rounded-lg border border-border hover:border-primary/40 hover:bg-muted transition-all"
             >
-              {theme === "light" ? (
-                <Moon className="h-4 w-4" />
-              ) : (
-                <Sun className="h-4 w-4" />
-              )}
-              <span className="sr-only">Toggle theme</span>
-            </Button>
-          </div>
-        </div>
+              {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </button>
 
-        {/* Mobile controls */}
-        <div className="lg:hidden flex items-center space-x-1">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={toggleLanguage}
-            className="font-bold text-xs px-2"
-            data-testid="button-language-toggle-mobile"
-          >
-            <span
-              className={`px-1.5 py-0.5 rounded text-[11px] font-bold ${
-                language === "EN"
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-green-600 text-white"
-              }`}
+            {/* Auth */}
+            {user ? (
+              <div className="relative">
+                <button
+                  onClick={() => setUserMenuOpen(!userMenuOpen)}
+                  className="flex items-center gap-2 pl-2 pr-3 py-1.5 rounded-lg border border-border hover:border-primary/40 bg-muted/50 hover:bg-muted transition-all"
+                >
+                  <div className="h-6 w-6 rounded-full gold-gradient flex items-center justify-center text-xs font-bold text-primary-foreground">
+                    {user.name.charAt(0).toUpperCase()}
+                  </div>
+                  <span className="text-sm font-semibold font-display hidden sm:block max-w-[80px] truncate">{user.name.split(" ")[0]}</span>
+                  <ChevronDown className={`h-3.5 w-3.5 text-muted-foreground transition-transform ${userMenuOpen ? "rotate-180" : ""}`} />
+                </button>
+                <AnimatePresence>
+                  {userMenuOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8, scale: 0.97 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 8, scale: 0.97 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute right-0 top-full mt-2 w-52 heritage-card shadow-xl py-1.5 z-50"
+                    >
+                      <div className="px-4 py-2.5 border-b border-border/50">
+                        <p className="text-sm font-semibold font-display">{user.name}</p>
+                        <p className="text-xs text-muted-foreground">{user.village}</p>
+                        {user.role === "admin" && <span className="badge-terra text-xs mt-1">Admin</span>}
+                      </div>
+                      <Link href="/dashboard">
+                        <div className="flex items-center gap-2.5 px-4 py-2.5 text-sm font-display cursor-pointer hover:bg-muted transition-colors">
+                          <User className="h-4 w-4 text-muted-foreground" />My Dashboard
+                        </div>
+                      </Link>
+                      {user.role === "admin" && (
+                        <Link href="/admin">
+                          <div className="flex items-center gap-2.5 px-4 py-2.5 text-sm font-display cursor-pointer hover:bg-muted transition-colors">
+                            <Shield className="h-4 w-4 text-muted-foreground" />Admin Panel
+                          </div>
+                        </Link>
+                      )}
+                      <button
+                        onClick={async () => { await logout(); }}
+                        className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm font-display cursor-pointer hover:bg-muted transition-colors text-destructive"
+                      >
+                        <LogOut className="h-4 w-4" />Sign Out
+                      </button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ) : (
+              <div className="hidden sm:flex items-center gap-2">
+                <Link href="/login">
+                  <button className="px-3 py-1.5 text-sm font-semibold font-display hover:bg-muted rounded-lg transition-all">Sign In</button>
+                </Link>
+                <Link href="/register">
+                  <button className="btn-gold py-1.5 px-4 text-sm">Join</button>
+                </Link>
+              </div>
+            )}
+
+            {/* Mobile Hamburger */}
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="lg:hidden h-8 w-8 flex items-center justify-center rounded-lg border border-border hover:bg-muted transition-all"
             >
-              {language === "EN" ? "EN" : "ST"}
-            </span>
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-            data-testid="button-theme-toggle-mobile"
-          >
-            {theme === "light" ? (
-              <Moon className="h-4 w-4" />
-            ) : (
-              <Sun className="h-4 w-4" />
-            )}
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            data-testid="button-menu-toggle"
-          >
-            {mobileOpen ? (
-              <X className="h-5 w-5" />
-            ) : (
-              <Menu className="h-5 w-5" />
-            )}
-          </Button>
+              {mobileOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Mobile Drawer */}
-      {mobileOpen && (
-        <div className="lg:hidden fixed inset-0 top-16 z-50 bg-background/98 backdrop-blur-sm h-[calc(100vh-4rem)] overflow-y-auto">
-          <div className="p-5 flex flex-col space-y-6">
-            {navGroups.map((group) => (
-              <div key={group.title} className="space-y-2">
-                <h4 className="font-serif font-semibold text-sm text-primary uppercase tracking-wider">
-                  {group.title}
-                </h4>
-                <div className="flex flex-col space-y-1 border-l-2 border-border pl-4">
-                  {group.items.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={() => setMobileOpen(false)}
-                      className={`text-sm py-2 rounded transition-colors ${
-                        location === item.href
-                          ? "text-primary font-semibold"
-                          : "text-muted-foreground hover:text-foreground"
-                      }`}
-                    >
-                      {item.label}
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="lg:hidden border-t border-border bg-card/95 backdrop-blur-sm overflow-hidden"
+          >
+            <div className="max-w-7xl mx-auto px-4 py-4 space-y-1">
+              {navGroups.map(group => (
+                <div key={group.title}>
+                  <p className="section-label py-2 px-2">{group.title}</p>
+                  {group.items.map(item => (
+                    <Link key={item.href} href={item.href}>
+                      <div className={`flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-display cursor-pointer transition-all ${isActive(item.href) ? "text-primary bg-primary/8 font-semibold" : "text-foreground/80 hover:bg-muted"}`}>
+                        {item.icon && <item.icon className="h-3.5 w-3.5" />}
+                        {item.label}
+                      </div>
                     </Link>
                   ))}
                 </div>
-              </div>
-            ))}
-
-            <div className="pt-4 border-t border-border space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-muted-foreground">
-                  {language === "EN" ? "Language" : "Puo"}
-                </span>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={toggleLanguage}
-                  className="gap-2 text-xs"
-                >
-                  <Globe className="h-3.5 w-3.5" />
-                  {language === "EN" ? "Switch to Sesotho" : "Switch to English"}
-                </Button>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-muted-foreground">
-                  {language === "EN" ? "Theme" : "Sebopeho"}
-                </span>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-                  className="gap-2 text-xs"
-                >
-                  {theme === "light" ? (
-                    <>
-                      <Moon className="h-3.5 w-3.5" /> Dark Mode
-                    </>
-                  ) : (
-                    <>
-                      <Sun className="h-3.5 w-3.5" /> Light Mode
-                    </>
-                  )}
-                </Button>
+              ))}
+              <div className="pt-3 border-t border-border mt-2">
+                {user ? (
+                  <div>
+                    <Link href="/dashboard"><div className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-display cursor-pointer hover:bg-muted"><User className="h-4 w-4" />Dashboard</div></Link>
+                    <button onClick={async () => { await logout(); }} className="w-full flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-display cursor-pointer hover:bg-muted text-destructive"><LogOut className="h-4 w-4" />Sign Out</button>
+                  </div>
+                ) : (
+                  <div className="flex gap-2">
+                    <Link href="/login" className="flex-1"><button className="w-full py-2.5 rounded-lg border border-border text-sm font-semibold font-display hover:bg-muted transition-all">Sign In</button></Link>
+                    <Link href="/register" className="flex-1"><button className="btn-gold w-full justify-center">Join</button></Link>
+                  </div>
+                )}
               </div>
             </div>
-          </div>
-        </div>
-      )}
-    </header>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
   );
 }
