@@ -1,0 +1,62 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "sUWG6rTT3wzgMo9rMO215"
+uri = "file://artifacts/stadium-area/public/images/landscape.png"
+type = "image"
+title = "Lesotho mountain landscapes"
+
+[[generated]]
+id = "CtjBRuGzTEXNpY6SVYskj"
+uri = "file://artifacts/stadium-area/public/images/maseru-city.png"
+type = "image"
+title = "Maseru cityscape"
+
+[[generated]]
+id = "5GOU9EITioRt3ywvH0hUr"
+uri = "file://artifacts/stadium-area/public/images/stadium.png"
+type = "image"
+title = "Stadium atmosphere"
+
+[[generated]]
+id = "O9Sd5TEq9-9fMKbG7Eonw"
+uri = "file://artifacts/stadium-area/public/images/education.png"
+type = "image"
+title = "Lesotho school students"
+
+[[generated]]
+id = "IR-6uGdJmvQ3roFl9JZsI"
+uri = "file://artifacts/stadium-area/public/images/culture.png"
+type = "image"
+title = "Basotho tradition"
+
+[[generated]]
+id = "xmleiYiDighzF27tqQSsR"
+uri = "file://artifacts/stadium-area/public/images/village.png"
+type = "image"
+title = "Village community scene"
+
+[[generated]]
+id = "IeSGvmraFguEpkvB1vTrT"
+uri = "file://artifacts/stadium-area/public/images/mokorotlo.png"
+type = "image"
+title = "Basotho hat craft"
+
+[[generated]]
+id = "qtQAvjT_6t0DxIpKuhnOb"
+uri = "file://artifacts/stadium-area/public/images/blanket.png"
+type = "image"
+title = "Lesotho traditional blanket"
+
+[[generated]]
+id = "xy9G_64gYdgAPUzLKOaom"
+uri = "file://artifacts/stadium-area/public/images/cathedral.png"
+type = "image"
+title = "Cathedral Maseru"
+
+[[generated]]
+id = "4GFytBmVIs_u8Jsf21x3a"
+uri = "file://artifacts/stadium-area/public/images/nature.png"
+type = "image"
+title = "Maseru district nature"
