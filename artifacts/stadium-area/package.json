@@ -2,6 +2,7 @@
   "name": "@workspace/stadium-area",
   "version": "0.0.0",
   "private": true,
+  "packageManager": "pnpm@latest",
   "type": "module",
   "scripts": {
     "dev": "vite --config vite.config.ts --host 0.0.0.0",
