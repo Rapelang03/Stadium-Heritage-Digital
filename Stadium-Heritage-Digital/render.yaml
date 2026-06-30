@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: stadium-heritage-digital
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /api/healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: stadium-heritage-db
+          property: connectionString
+
+databases:
+  - name: stadium-heritage-db
+    plan: free

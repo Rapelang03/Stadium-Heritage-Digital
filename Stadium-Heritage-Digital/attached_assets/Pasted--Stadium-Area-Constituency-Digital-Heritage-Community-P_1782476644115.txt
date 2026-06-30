@@ -1,0 +1,127 @@
+# Stadium Area Constituency Digital Heritage & Community Portal
+
+I want to build an exceptional, premium-quality web application that serves as the official digital identity of **Stadium Area Constituency** in Maseru, Lesotho.
+
+This should not look like a school project, a simple tourism website, or a basic government portal. Instead, it should feel like a modern digital experience that celebrates the constituency's history, people, culture, landmarks, education, sports, development, businesses, and future aspirations.
+
+The application should be visually stunning, highly interactive, responsive on all devices, and designed to professional standards. It should create an emotional connection with visitors while also serving as an informative community platform.
+
+## Research Before Building
+
+Before generating content or designing the application, thoroughly research Stadium Area Constituency using reliable and authoritative sources.
+
+Do not invent, guess, or fabricate facts.
+
+Only include information that can be verified from trustworthy sources such as government publications, census information, educational institutions, reputable geographic references, historical records, and other authoritative resources.
+
+Where appropriate, include a references or sources section acknowledging the information used.
+
+Research topics should include, but not be limited to:
+
+* What Stadium Area Constituency is
+* Its history and origins
+* How it developed over time
+* Its significance within Maseru and Lesotho
+* Population and demographic information
+* Administrative role
+* Villages and neighbourhoods within the constituency
+* Educational institutions
+* Sports facilities and sporting culture
+* Historical events
+* Community organizations
+* Religious institutions
+* Healthcare facilities
+* Public services
+* Government offices
+* Infrastructure and transportation
+* Economic activities
+* Local businesses
+* Tourism potential
+* Cultural heritage
+* Basotho traditions
+* Important personalities associated with the area
+* Current developments and future projects
+* Interesting facts visitors may not know
+
+Present this information through engaging storytelling rather than simply listing facts.
+
+## Website Vision
+
+The website should feel like a combination of:
+
+* A digital museum
+* A community information hub
+* A local discovery platform
+* A modern magazine
+* A civic portal
+* A digital heritage archive
+
+Use creativity to determine the best information architecture and user experience.
+
+## Language Support
+
+The entire website must support both:
+
+* Sesotho (default language)
+* English
+
+Every piece of content, navigation item, heading, button, description, and interface element should be professionally translated between both languages.
+
+Users should be able to switch languages instantly from anywhere within the application.
+
+## Theme Support
+
+Implement both Light Mode and Dark Mode.
+
+Choose an elegant, modern colour palette that reflects the identity of Stadium Area and Lesotho. Select colours that provide excellent accessibility, visual harmony, and a premium appearance without requiring further guidance.
+
+## Main Navigation
+
+Design a premium navigation experience that includes, where appropriate:
+
+* Home
+* History
+* About Stadium Area
+* Villages & Neighbourhoods
+* Education
+* Sports & Recreation
+* Community Life
+* Culture & Heritage
+* Places to Visit
+* Developments
+* Businesses & Marketplace
+* Gallery
+* Interactive Map
+* News & Announcements
+* Events
+* Useful Contacts
+* Frequently Asked Questions
+* Sources & References
+
+Feel free to improve or expand this navigation if it creates a better user experience.
+
+## Content Experience
+
+Avoid short paragraphs and generic descriptions.
+
+Create engaging, well-written content that tells the story of Stadium Area in a way that encourages exploration.
+
+Include interactive elements wherever they improve the experience, such as timelines, animated statistics, maps, image galleries, development journeys, featured locations, historical milestones, and community highlights.
+
+## Media
+
+Generate high-quality placeholder images, illustrations, icons, backgrounds, and visual assets wherever needed.
+
+These placeholders should integrate naturally into the design because I will replace them later with authentic local photographs.
+
+Do not ask me to provide images during development.
+
+## Design Expectations
+
+The application should feel polished, modern, immersive, and memorable.
+
+Prioritize excellent typography, spacing, accessibility, responsiveness, animation, and performance.
+
+Use your own design expertise to create layouts and interactions that exceed typical website standards.
+
+Build this project as if it were competing for a national digital innovation award and intended to become the official online presence of Stadium Area Constituency.
