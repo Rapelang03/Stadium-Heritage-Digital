@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: stadium-heritage-digital
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /api/healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: SQLITE_PATH
+        value: /app/data/app.db
+    # Optional but recommended: a persistent disk so the SQLite file survives
+    # restarts and redeploys. Render's free plan does not support disks — if
+    # you're on the free plan, leave this out (or comment it) and accept that
+    # the database resets on each deploy; on a paid plan, uncomment it.
+    # disk:
+    #   name: stadium-heritage-data
+    #   mountPath: /app/data
+    #   sizeGB: 1
