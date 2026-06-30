@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { mockApiFetch, enableMockApi, isMockApiEnabled } from "@/lib/mockApi";
 
 export interface AuthUser {
   id: number;
@@ -31,16 +32,35 @@ interface RegisterData {
 const API = "/api";
 
 async function apiFetch(path: string, options?: RequestInit) {
-  const res = await fetch(`${API}${path}`, {
-    credentials: "include",
-    headers: { "Content-Type": "application/json" },
-    ...options,
-  });
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({ error: "Request failed" }));
-    throw new Error(err.error || "Request failed");
+  // If mock API is already enabled, use it directly to avoid failed requests
+  if (isMockApiEnabled()) {
+    return mockApiFetch(path, options);
   }
-  return res.json();
+
+  try {
+    const res = await fetch(`${API}${path}`, {
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      ...options,
+    });
+    if (!res.ok) {
+      // If backend is not available, fall back to mock API
+      if (res.status === 404 || res.status === 503 || res.status === 502 || res.status === 0) {
+        enableMockApi();
+        return mockApiFetch(path, options);
+      }
+      const err = await res.json().catch(() => ({ error: "Request failed" }));
+      throw new Error(err.error || "Request failed");
+    }
+    return res.json();
+  } catch (err: any) {
+    // Network error or backend not running — use mock API
+    if (err.name === "TypeError" || err.message?.includes("Failed to fetch") || err.message?.includes("NetworkError") || err.message?.includes("fetch")) {
+      enableMockApi();
+      return mockApiFetch(path, options);
+    }
+    throw err;
+  }
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
