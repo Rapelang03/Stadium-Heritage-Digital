@@ -1,7 +1,7 @@
 {
   "version": 2,
   "installCommand": "npm install -g pnpm@10.12.4 && COREPACK_ENABLE_AUTO_PIN=0 COREPACK_ENABLE_STRICT=0 pnpm install --no-frozen-lockfile",
-  "buildCommand": "pnpm run typecheck:libs && pnpm --filter @workspace/stadium-area run build",
+  "buildCommand": "pnpm run typecheck:libs && pnpm --filter @workspace/api-server run build && pnpm --filter @workspace/stadium-area run build",
   "outputDirectory": "artifacts/stadium-area/dist/public",
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api" },
